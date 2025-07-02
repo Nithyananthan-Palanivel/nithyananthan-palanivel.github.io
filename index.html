@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prestige Wanderers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1.5s ease-out;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .testimonial-section {
+        position: relative;
+        padding: 60px 20px;
+        background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .testimonial-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 40px;
+      }
+
+      .testimonial-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 24px;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .testimonial-card {
+        min-width: 320px;
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-card p {
+        color: #555;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+
+      .testimonial-card strong {
+        color: #111;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .arrow-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: #ffffff;
+        border: none;
+        padding: 12px;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .arrow-button:hover {
+        background: #eaeaea;
+      }
+
+      .arrow-left {
+        left: 10px;
+      }
+
+      .arrow-right {
+        right: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .arrow-button {
+          display: none;
+        }
+      }
+    </style>
+
+    <!-- Styles -->
+    <style>
+      .testimonial-section {
+        position: relative;
+        padding: 60px 20px;
+        background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .testimonial-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 40px;
+      }
+
+      .testimonial-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .testimonial-card {
+        min-width: 300px; /* Smaller width */
+        max-width: 300px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-card p {
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .testimonial-card strong {
+        color: #111;
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .arrow-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: #ffffff;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .arrow-button:hover {
+        background: #eaeaea;
+      }
+
+      .arrow-left {
+        left: 10px;
+      }
+
+      .arrow-right {
+        right: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .arrow-button {
+          display: none;
+        }
+
+        .testimonial-card {
+          min-width: 80%;
+        }
+      }
+       .footer {
+    background: #1f2937; /* Dark Gray */
+    color: #e5e7eb; /* Light Text */
+    padding: 40px 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    gap: 30px;
+  }
+
+  .footer-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 8px;
+  }
+
+  .footer-section a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .footer-section a:hover {
+    color: #ffffff;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .footer-socials a {
+    font-size: 18px;
+    color: #d1d5db;
+    transition: color 0.3s;
+  }
+
+  .footer-socials a:hover {
+    color: #ffffff;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #374151;
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #9ca3af;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+    }
+  }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const animatedItems = document.querySelectorAll(".fade-up");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        animatedItems.forEach((item) => observer.observe(item));
+      });
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-b from-orange-50 via-white to-teal-50 text-gray-800"
+  >
+   <!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-orange-100 to-teal-100 backdrop-blur-md shadow-md">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    
+    <!-- Logo -->
+    <a href="#" class="text-2xl font-bold text-teal-700">Prestige Wanderers</a>
+
+    <!-- Nav Links -->
+    <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-teal-800">
+      <a href="#" class="hover:text-orange-600">Home</a>
+      <a href="#about" class="hover:text-orange-600">About</a>
+      <a href="#destinations" class="hover:text-orange-600">Destinations</a>
+      <a href="#how" class="hover:text-orange-600">How It Works</a>
+      <a href="#gallery" class="hover:text-orange-600">Gallery</a>
+      <a href="#contact" class="hover:text-orange-600">Contact</a>
+
+      <!-- WhatsApp Icon + Text -->
+      <a href="https://wa.me/919597427031" target="_blank" class="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white py-1.5 px-4 rounded-full transition duration-300 shadow-sm">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+          <path d="M380.9 97.1C339-4.1 228.1-33.3 138.3 25.7 86.5 58.3 49.7 115.5 41.4 178.1c-6.1 46.2 2.3 92.6 24 133.5l-32.9 93.5c-2.8 8 4.7 15.5 12.7 12.7l93.5-32.9c40.9 21.7 87.3 30.1 133.5 24 62.6-8.3 119.8-45.1 152.4-96.9 59-89.8 29.8-200.7-44.7-241.9zM222.5 370.9c-31.6 0-62.4-9.3-88.6-26.6l-6.3-4-55.4 19.6 19.6-55.4-4-6.3c-41.1-66.5-17.9-153.9 52.4-192.3 53.5-30 121.3-20.1 166.2 24.7 28.8 28.8 44.8 67.3 44.8 108.1-.1 86.6-70.4 157-158.7 157zm90.5-111.3c-4.9-2.4-29-14.3-33.5-15.9-4.5-1.7-7.8-2.4-11.1 2.4s-12.7 15.9-15.6 19.2-5.7 3.6-10.6 1.2c-29.6-14.8-48.9-26.4-68.4-59.7-5.2-8.9 5.2-8.3 14.8-27.6 1.6-3.3.8-6.2-.4-8.6s-11.1-26.7-15.2-36.6c-4-9.6-8-8.3-11.1-8.5-2.9-.2-6.2-.2-9.5-.2s-8.6 1.2-13.1 6.2c-4.5 4.9-17.2 16.8-17.2 41s17.6 47.5 20 50.8c2.4 3.3 34.7 53 84.1 74.3 49.4 21.4 49.4 14.3 58.3 13.3 8.9-.8 29-11.9 33.1-23.4 4-11.6 4-21.7 2.9-23.5-1.2-1.6-4.3-2.4-9.1-4.7z"/>
+        </svg>
+        <span class="text-sm font-semibold">Chat Now</span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+    <!-- Hero Section with Slider -->
+    <header class="relative h-screen pt-20 overflow-hidden fade-up">
+      <div class="absolute inset-0 z-0">
+        <div class="swiper-container h-full">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide bg-cover bg-center h-full"
+              style="background-image: url('images/hero/hero1.jpg')"
+            ></div>
+            <div
+              class="swiper-slide bg-cover bg-center h-full"
+              style="background-image: url('images/hero/hero2.jpg')"
+            ></div>
+            <div
+              class="swiper-slide bg-cover bg-center h-full"
+              style="background-image: url('images/hero/hero3.jpg')"
+            ></div>
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+      </div>
+      <div
+        class="relative z-20 flex flex-col justify-center items-center text-white text-center h-full px-4"
+      >
+        <h1
+          class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 drop-shadow fade-up"
+        >
+          Prestige Wanderers
+        </h1>
+        <p class="text-xl md:text-2xl font-medium">
+          Explore Ooty, Kodaikanal & Masinagudi with Us!
+        </p>
+        <p class="mt-4 text-lg">📞 Bookings via Call | WhatsApp | Instagram</p>
+        <p class="mt-2 text-md font-semibold text-orange-300">
+          🎯 No Fixed Packages – 100% Customized Trips
+        </p>
+        <a
+          href="#contact"
+          class="mt-8 inline-block bg-gradient-to-r from-orange-500 to-teal-500 hover:from-orange-600 hover:to-teal-600 text-white py-3 px-8 rounded-full text-lg font-bold shadow-lg transition"
+          >Plan Your Trip</a
+        >
+      </div>
+    </header>
+
+    <!-- SwiperJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper-container", {
+        loop: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+      });
+    </script>
+
+    <!-- About Us -->
+    <section
+      id="about"
+      class="py-24 px-6 max-w-7xl mx-auto bg-white/90 rounded-3xl shadow-2xl mt-16"
+    >
+      <h2
+        class="text-4xl font-extrabold text-center text-teal-900 mb-14 fade-up"
+      >
+        Why Choose Prestige Wanderers?
+      </h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Features -->
+        <div class="space-y-8">
+          <div
+            class="flex items-start space-x-4 hover:bg-orange-50 p-4 rounded-xl transition shadow-sm fade-up"
+          >
+            <div class="text-4xl">🚐</div>
+            <div>
+              <h3 class="text-xl font-semibold text-teal-800">
+                Multiple Vehicle Options
+              </h3>
+              <p class="text-gray-600 text-sm">
+                From small cars to 30-seaters – we arrange the perfect ride
+                based on your group size.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start space-x-4 hover:bg-orange-50 p-4 rounded-xl transition shadow-sm fade-up"
+          >
+            <div class="text-4xl">🏨</div>
+            <div>
+              <h3 class="text-xl font-semibold text-teal-800">Stay Bookings</h3>
+              <p class="text-gray-600 text-sm">
+                Handpicked resorts, cottages, and hotels — based on your taste
+                and comfort.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start space-x-4 hover:bg-orange-50 p-4 rounded-xl transition shadow-sm fade-up"
+          >
+            <div class="text-4xl">🤝</div>
+            <div>
+              <h3 class="text-xl font-semibold text-teal-800">
+                Complete Support
+              </h3>
+              <p class="text-gray-600 text-sm">
+                We travel along with you — from planning to drop-off — ensuring
+                everything runs smooth.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start space-x-4 hover:bg-orange-50 p-4 rounded-xl transition shadow-sm fade-up"
+          >
+            <div class="text-4xl">📲</div>
+            <div>
+              <h3 class="text-xl font-semibold text-teal-800">Easy Booking</h3>
+              <p class="text-gray-600 text-sm">
+                Booking your trip is just a message away — via WhatsApp,
+                Instagram, or call.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Highlight Card -->
+        <div
+          class="bg-gradient-to-br from-orange-100 to-teal-100 p-10 rounded-3xl shadow-inner text-center"
+        >
+          <h4 class="text-5xl font-extrabold text-orange-700 mb-4">3+ Years</h4>
+          <p class="text-lg text-gray-800 font-medium mb-2">
+            of successful personalized travel planning
+          </p>
+          <p class="text-sm text-gray-600">
+            Hundreds of families, couples, and explorers have trusted Prestige
+            Wanderers since 2021.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destinations -->
+    <section
+      id="destinations"
+      class="py-24 px-6 bg-gradient-to-br from-teal-50 via-white to-orange-50"
+    >
+      <div class="max-w-7xl mx-auto">
+        <h2
+          class="text-4xl font-extrabold text-center text-teal-900 mb-16 fade-up"
+        >
+          Explore Our Destinations
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- Ooty -->
+          <div
+            class="bg-white fade-up rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-green-500 p-6 flex flex-col justify-between"
+          >
+            <div>
+              <div class="text-4xl mb-3">🏔️</div>
+              <h3 class="text-xl font-semibold text-green-800 mb-2">Ooty</h3>
+              <p class="text-gray-600 text-sm">
+                Queen of Hill Stations – tea gardens, lakes, botanical gardens,
+                and the iconic toy train.
+              </p>
+            </div>
+            <div class="mt-4">
+              <span
+                class="inline-block text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full"
+                >Ideal for: Families, Couples</span
+              >
+            </div>
+          </div>
+
+          <!-- Kodaikanal -->
+          <div
+            class="bg-white rounded-3xl fade-up shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-pink-500 p-6 flex flex-col justify-between"
+          >
+            <div>
+              <div class="text-4xl mb-3">🌸</div>
+              <h3 class="text-xl font-semibold text-pink-800 mb-2">
+                Kodaikanal
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Peaceful valleys, scenic drives, boating, Coaker’s Walk, and a
+                romantic climate year-round.
+              </p>
+            </div>
+            <div class="mt-4">
+              <span
+                class="inline-block text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full"
+                >Ideal for: Honeymooners, Chill Seekers</span
+              >
+            </div>
+          </div>
+
+          <!-- Masinagudi -->
+          <div
+            class="bg-white rounded-3xl fade-up shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-yellow-500 p-6 flex flex-col justify-between"
+          >
+            <div>
+              <div class="text-4xl mb-3">🐘</div>
+              <h3 class="text-xl font-semibold text-yellow-800 mb-2">
+                Masinagudi
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Wildlife safaris, forest stays, bonfires, and an offbeat nature
+                escape at the Nilgiri foothills.
+              </p>
+            </div>
+            <div class="mt-4">
+              <span
+                class="inline-block text-xs bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full"
+                >Ideal for: Nature Lovers, Adventurers</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section
+      id="how"
+      class="py-24 px-6 bg-gradient-to-r from-white via-orange-50 to-teal-50"
+    >
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-teal-900 mb-16 fade-up">
+          How It Works
+        </h2>
+
+        <div class="relative border-t-2 border-dashed border-teal-300">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center text-left md:text-center"
+          >
+            <!-- Step 1 -->
+            <div class="w-full md:w-1/4 px-4 py-10 md:py-6 fade-up">
+              <div class="flex items-start md:flex-col md:items-center">
+                <div
+                  class="bg-teal-600 text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-semibold shadow-md"
+                >
+                  1
+                </div>
+                <div class="ml-4 md:ml-0 md:mt-4">
+                  <h3 class="text-md font-semibold text-teal-800">Reach Out</h3>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Call, WhatsApp or DM us with your travel plans.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="w-full md:w-1/4 px-4 py-10 md:py-6 fade-up">
+              <div class="flex items-start md:flex-col md:items-center">
+                <div
+                  class="bg-orange-500 text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-semibold shadow-md"
+                >
+                  2
+                </div>
+                <div class="ml-4 md:ml-0 md:mt-4">
+                  <h3 class="text-md font-semibold text-orange-800">We Plan</h3>
+                  <p class="text-sm text-gray-600 mt-1">
+                    We collect your preferences and design the perfect trip.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="w-full md:w-1/4 px-4 py-10 md:py-6 fade-up">
+              <div class="flex items-start md:flex-col md:items-center">
+                <div
+                  class="bg-yellow-400 text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-semibold shadow-md"
+                >
+                  3
+                </div>
+                <div class="ml-4 md:ml-0 md:mt-4">
+                  <h3 class="text-md font-semibold text-yellow-800">
+                    Get Quote
+                  </h3>
+                  <p class="text-sm text-gray-600 mt-1">
+                    We send a transparent, no-hidden-fee custom quote.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="w-full md:w-1/4 px-4 py-10 md:py-6 fade-up">
+              <div class="flex items-start md:flex-col md:items-center">
+                <div
+                  class="bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-semibold shadow-md"
+                >
+                  4
+                </div>
+                <div class="ml-4 md:ml-0 md:mt-4">
+                  <h3 class="text-md font-semibold text-green-800">
+                    Travel Easy
+                  </h3>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Once booked, we handle the rest. You just enjoy the journey!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section
+      id="gallery"
+      class="py-24 bg-gradient-to-b from-white to-orange-50 px-6"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-teal-900 mb-4 fade-up">
+          Gallery
+        </h2>
+        <p class="text-lg text-gray-600 mb-12 fade-up">
+          Captured moments from our happy travelers
+        </p>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        >
+          <a
+            href="images/clients/1.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/1.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 1"
+            />
+          </a>
+          <a
+            href="images/clients/2.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/2.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 2"
+            />
+          </a>
+          <a
+            href="images/clients/3.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/3.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 3"
+            />
+          </a>
+          <a
+            href="images/clients/4.jpg"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/4.jpg"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 4"
+            />
+          </a>
+          <a
+            href="images/clients/5.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/5.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 5"
+            />
+          </a>
+          <a
+            href="images/clients/6.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/6.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 6"
+            />
+          </a>
+          <a
+            href="images/clients/7.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/7.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 7"
+            />
+          </a>
+          <a
+            href="images/clients/8.JPG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/8.JPG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 8"
+            />
+          </a>
+          <a
+            href="images/clients/9.PNG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/9.PNG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 9"
+            />
+          </a>
+          <a
+            href="images/clients/10.PNG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/10.PNG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 10"
+            />
+          </a>
+          <a
+            href="images/clients/11.PNG"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/11.PNG"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 11"
+            />
+          </a>
+          <a
+            href="images/clients/12.jpg"
+            class="glightbox"
+            data-gallery="travel"
+          >
+            <img
+              src="images/clients/12.jpg"
+              class="rounded-xl shadow-md hover:scale-105 transition duration-300 object-cover w-full h-60"
+              alt="Client Trip 12"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <div class="testimonial-section">
+      <h2>What Our Guests Say</h2>
+
+      <!-- Arrows -->
+      <button class="arrow-button arrow-left" onclick="scrollTestimonials(-1)">
+        ←
+      </button>
+      <button class="arrow-button arrow-right" onclick="scrollTestimonials(1)">
+        →
+      </button>
+
+      <!-- Scrollable Testimonials -->
+      <div id="testimonialContainer" class="testimonial-container">
+        <div class="testimonial-card">
+          <p>
+            “Thank you so much, Bro! It was an unforgettable experience ✨. The
+            stay and campfire were amazing—even the rain didn’t stop us!”
+          </p>
+          <strong>– Nikitha</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            “Trip arrangements were excellent! Cab, stay, and food – everything
+            was spot on. Keep rocking 🙌✨.”
+          </p>
+          <strong>– Riyaz</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            “Full of gratitude for your care and arrangements. We hope to make
+            more memories with your team 🌻✨.”
+          </p>
+          <strong>– Sahithi</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            “Food – 100/100! Stay – Excellent! Hospitality – Top-notch. Will
+            visit again for sure.”
+          </p>
+          <strong>– Stephen</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            “Your real-time guidance and warmth turned this trip into cherished
+            memories. 10/10!”
+          </p>
+          <strong>– Pooja Tusamad</strong>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            “Special thanks for organizing everything smoothly. Niranjan anna,
+            the driver, was top class. Romba nandri bro!”
+          </p>
+          <strong>– Sarath Kumar</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript for Arrows -->
+    <script>
+      function scrollTestimonials(direction) {
+        const container = document.getElementById("testimonialContainer");
+        const scrollAmount = 360;
+        container.scrollBy({
+          left: direction * scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    </script>
+
+    <!-- Contact -->
+    <!-- Footer -->
+<footer id="contact" class="bg-teal-900 text-white py-12 px-6">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+    
+    <!-- Logo & Intro -->
+    <div>
+      <h3 class="text-2xl font-bold mb-2">Prestige Wanderers</h3>
+      <p class="text-sm text-gray-300">Turning trips into unforgettable journeys with care, comfort, and curated experiences.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><a href="#" class="hover:text-white">Home</a></li>
+        <li><a href="#about" class="hover:text-white">About</a></li>
+        <li><a href="#destinations" class="hover:text-white">Destinations</a></li>
+        <li><a href="#gallery" class="hover:text-white">Gallery</a></li>
+        <li><a href="#contact" class="hover:text-white">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact & Social -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Get in Touch</h4>
+      <p class="text-sm text-gray-300 mb-2">📞 +91 95974 27031</p>
+      <p class="text-sm text-gray-300 mb-4">📧 sharan@prestigewanderers.com</p>
+
+      <div class="flex space-x-4">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/prestige_wanderers?igsh=MTU4b21wcDQ2emw2" target="_blank" aria-label="Instagram"
+           class="bg-pink-500 hover:bg-pink-600 p-3 rounded-full text-white transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.056 1.97.24 2.42.403a4.92 4.92 0 011.691 1.105 4.92 4.92 0 011.105 1.691c.163.45.347 1.25.403 2.42.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.403 2.42a4.902 4.902 0 01-1.105 1.691 4.902 4.902 0 01-1.691 1.105c-.45.163-1.25.347-2.42.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.42-.403a4.92 4.92 0 01-1.691-1.105 4.92 4.92 0 01-1.105-1.691c-.163-.45-.347-1.25-.403-2.42C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.42a4.92 4.92 0 011.105-1.691 4.92 4.92 0 011.691-1.105c.45-.163 1.25-.347 2.42-.403 1.266-.058 1.646-.07 4.85-.07zm0 1.837c-3.145 0-3.507.012-4.741.068-1.021.047-1.576.218-1.942.363a3.093 3.093 0 00-1.125.731 3.093 3.093 0 00-.731 1.125c-.145.366-.316.921-.363 1.942-.056 1.234-.068 1.596-.068 4.741s.012 3.507.068 4.741c.047 1.021.218 1.576.363 1.942.165.416.394.775.731 1.125.35.337.709.566 1.125.731.366.145.921.316 1.942.363 1.234.056 1.596.068 4.741.068s3.507-.012 4.741-.068c1.021-.047 1.576-.218 1.942-.363a3.093 3.093 0 001.125-.731 3.093 3.093 0 00.731-1.125c.145-.366.316-.921.363-1.942.056-1.234.068-1.596.068-4.741s-.012-3.507-.068-4.741c-.047-1.021-.218-1.576-.363-1.942a3.093 3.093 0 00-.731-1.125 3.093 3.093 0 00-1.125-.731c-.366-.145-.921-.316-1.942-.363-1.234-.056-1.596-.068-4.741-.068zm0 4.838a5 5 0 110 10 5 5 0 010-10zm0 1.837a3.163 3.163 0 100 6.327 3.163 3.163 0 000-6.327zm6.406-2.187a1.168 1.168 0 110 2.337 1.168 1.168 0 010-2.337z"/>
+</svg>
+
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/919597427031" target="_blank" aria-label="WhatsApp"
+           class="bg-green-500 hover:bg-green-600 p-3 rounded-full text-white transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M16 3C9.373 3 4 8.373 4 15c0 2.53.824 4.868 2.218 6.792L4 29l7.324-2.218A11.931 11.931 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21a9.93 9.93 0 0 1-5.088-1.413l-.363-.218-4.361 1.322 1.344-4.257-.235-.374A9.925 9.925 0 0 1 6 15c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm5.623-7.277c-.307-.154-1.814-.895-2.096-.997-.281-.102-.486-.154-.691.154s-.793.996-.973 1.199c-.18.204-.359.23-.666.077-.307-.154-1.295-.478-2.464-1.526-.91-.81-1.524-1.812-1.702-2.118-.18-.307-.019-.473.134-.626.137-.136.307-.358.461-.537.153-.179.204-.307.307-.511.103-.204.051-.384-.026-.537-.077-.154-.691-1.666-.947-2.282-.248-.597-.5-.516-.691-.526l-.59-.01c-.204 0-.537.077-.82.384-.282.307-1.077 1.051-1.077 2.566s1.102 2.975 1.254 3.179c.154.204 2.167 3.308 5.251 4.637.733.316 1.304.504 1.75.644.734.234 1.4.2 1.926.122.588-.087 1.814-.74 2.07-1.455.256-.717.256-1.332.179-1.455-.076-.122-.282-.179-.59-.333z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center text-sm text-gray-400 mt-10 border-t border-teal-800 pt-6">
+    © 2025 Prestige Wanderers. All rights reserved.
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+      const lightbox = GLightbox({
+        selector: ".glightbox",
+      });
+    </script>
+  </body>
+</html>
